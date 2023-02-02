@@ -1,4 +1,11 @@
+using eSchool.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+//Add Db connection
+var con = builder.Configuration.GetConnectionString("SchoolDbConnection");
+builder.Services.AddDbContext<SchoolDbContext>(x => x.UseSqlServer(con));
+//Add sweet alert
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

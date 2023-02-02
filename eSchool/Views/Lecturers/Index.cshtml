@@ -1,0 +1,85 @@
+﻿@model IEnumerable<eSchool.Data.Lecturer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doe)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <button data-id="@item.Id" class="deleteBtn" type="button"><i class="bi bi-trash3"></i></button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<form asp-action="Delete" id="Deletelecture">
+    <input type="hidden" id="lectureid" name="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+</form>
+
+@section Scripts
+{
+    <script>
+    $(function(){
+        $(".deleteBtn").click(function(e){
+            swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this imaginary file!",
+              icon: "warning",
+              buttons: ["No!", "Yes Delete it!"],
+             // buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                            
+                swal("Poof! Your imaginary file has been deleted!", {
+                  icon: "success",
+                });
+                            var btn = $(this);
+                            var id = btn.data("id");
+                            $("#lectureid").val(id);
+                            $("#Deletelecture").submit();
+              } else {
+                swal("Your imaginary file is safe!");
+              }
+                });
+        })
+    })
+    </script>
+}
