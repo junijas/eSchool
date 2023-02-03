@@ -1,0 +1,85 @@
+@model eSchool.Models.ClassEnrollmentViewModel
+
+@{
+    ViewData["Title"] = "ManageEnrollments";
+}
+
+<h2>Manage Enrollments for @Model.Class.Time Session of @Model.Class.CourseName</h2>
+<h3>Instructor: @Model.Class.LecturerName</h3>
+
+<hr/>
+<table class="table">
+    <thead>
+    <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Action</td>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Students)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.Surname</td>
+            <td>
+                @* @if (item.IsEnrolled)
+                {
+                    <button data-studentId="@item.Id" data-shouldEnroll="false"
+                            class="btn btn-danger enrollmentBtn" type="button">Remove</button>
+                }
+                else
+                {
+                    <button data-studentId="@item.Id" data-shouldEnroll="false"
+                            class="btn btn-danger enrollmentBtn" type="button">Add</button>
+                }*@
+                @{
+                    string btnText = item.IsEnrolled ? "Remove" : "Add";
+                    string btnClass = item.IsEnrolled ? "danger" : "success";
+                    bool shouldEnroll = !item.IsEnrolled;
+                }
+                <button data-studentId="@item.Id"  data-shouldEnroll="@shouldEnroll" 
+                        class="btn btn-@btnClass enrollmentBtn">@btnText</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<form action="EnrollStudent" id="classEnrollmentForm">
+    <input type="hidden" id="classId" name="ClassId" value="@Model.Class.Id"/>
+    <input type="hidden" id="studentId" name="StudentId"/>
+    <input type="hidden" id="shouldEnroll" name="ShouldEnroll"/>
+</form>
+
+
+@section Scripts
+    {
+    <script>
+        $(function () {
+            $(".enrollmentBtn").click(function (e) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: ["No!", "Yes Delete it!"],
+                    // buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+
+                            swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                            var btn = $(this);
+                            var studentId = btn.data("studentId");
+                            var shouldEnroll = btn.data("shouldEnroll")
+                            $("#studentId").val(studentId);
+                            $("#shouldEnroll").val(shouldEnroll);
+                            $("#classEnrollmentForm").submit();
+                        }
+                    });
+            })
+        })
+    </script>
+}

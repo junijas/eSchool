@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using eSchool.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace eSchool.Data;
@@ -92,7 +93,6 @@ public partial class SchoolDbContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
         });
-
         OnModelCreatingPartial(modelBuilder);
     }
 
