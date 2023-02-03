@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/eSchool.styles.css" asp-append-version="true" />
     <link href="~/css/bootstrap-icons.css" rel="stylesheet" />
     <link href="~/css/jquery.datatables.min.css" rel="stylesheet" />
+    <link href="~/css/datatables.bootstrap4.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -39,7 +40,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Lecturers" asp-action="Index">Lecturers</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Classes" asp-action="Index">Classes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
+                        </li>
                     </ul>
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>
@@ -59,7 +67,11 @@
     <script src="~/js/sweetalert.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/jquery.datatables.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+<script src="~/js/jquery.datatables.min.js"></script>
+    <script src="~/js/datatables.bootstrap4.min.js"></script>
+
+
+
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

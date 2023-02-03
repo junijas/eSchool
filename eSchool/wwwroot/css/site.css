@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+#DataTables_Table_0_filter > label > input[type=search] {
+    margin-bottom: 20px;
+    width: 300px;
+}
+.btn-sm {
+    padding: 2px;
+}

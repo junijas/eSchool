@@ -12,4 +12,6 @@ public partial class Student
     public string? Surname { get; set; }
 
     public DateTime? Dob { get; set; }
+
+    public virtual ICollection<Enrollment> Enrollments { get; } = new List<Enrollment>();
 }
